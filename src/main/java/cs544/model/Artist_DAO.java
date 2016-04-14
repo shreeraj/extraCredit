@@ -7,11 +7,13 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.springframework.transaction.annotation.Transactional;
 
 import cs544.controller.HibernateUtil;
 import cs544.domain.Artist;
 import cs544.domain.Movie;
 
+@Transactional
 public class Artist_DAO {
 	private SessionFactory sf;
 	public Artist_DAO(SessionFactory sf){
@@ -19,14 +21,15 @@ public class Artist_DAO {
 	}
 	
 	public List<Artist> getAllArtist() {
-		Session sf = HibernateUtil.getSessionFactory().getCurrentSession();
+//		Session sf = HibernateUtil.getSessionFactory().getCurrentSession();
 		List<Artist> artists = new ArrayList<Artist>();
-		Transaction tx = null;
+//		Transaction tx = null;
 		try {
-			tx = sf.beginTransaction();
-			Query criteria = sf.createQuery("From Artist art");
+//			tx = sf.beginTransaction();
+			Query criteria = sf.getCurrentSession().createQuery("From Artist art");
 			artists = criteria.list();
-			sf.getTransaction().commit();
+			
+//			sf.getTransaction().commit();
 			//			tx.commit();
 		} catch (Exception ex) {
 			System.out.println(ex.getMessage());
@@ -35,71 +38,72 @@ public class Artist_DAO {
 	}
 
 	public void addArtist(Artist artist) throws Exception {
-		Session sf = HibernateUtil.getSessionFactory().getCurrentSession();
-		Transaction tx = sf.getTransaction();
+//		Session sf = HibernateUtil.getSessionFactory().getCurrentSession();
+//		Transaction tx = sf.getTransaction();
 
 		try {
-			tx.begin();
-			sf.persist(artist);
+//			tx.begin();
+			sf.getCurrentSession().persist(artist);
 
 		} catch (Exception e) {
-			if (tx != null)
-				tx.rollback();
+//			if (tx != null)
+//				tx.rollback();
 			e.printStackTrace();
-			throw new Exception(e);
+//			throw new Exception(e);
 		}
 	}
 
-	public Artist retriveartist(int id) throws Exception {
+	public Artist getArtist(int id) throws Exception {
 
-		Session sf = HibernateUtil.getSessionFactory().getCurrentSession();
-		Transaction tx = null;
-
+//		Session sf = HibernateUtil.getSessionFactory().getCurrentSession();
+//		Transaction tx = null;
+		Artist artist = new Artist();
 		try {
 
-			tx = sf.beginTransaction();
-			Artist artist = (Artist) sf.get(Artist.class, id);
-			return artist;
+//			tx = sf.beginTransaction();
+			 artist = (Artist) sf.getCurrentSession().get(Artist.class, id);
+			
 
 		} catch (Exception e) {
-			if (tx != null)
+//			if (tx != null)
 				e.printStackTrace();
-			throw new Exception(e);
+//			throw new Exception(e);
 		}
+		return artist;
 	}
 
 	public void modifyArtist(Artist art) throws Exception {
 
-		Session sf = HibernateUtil.getSessionFactory().getCurrentSession();
-		Transaction tx = null;
+//		Session sf = HibernateUtil.getSessionFactory().getCurrentSession();
+//		Transaction tx = null;
 
 		try {
 
-			tx = sf.beginTransaction();
-			sf.merge(art);
-			tx.commit();
+//			tx = sf.beginTransaction();
+			sf.getCurrentSession().merge(art);
+//			tx.commit();
 		} catch (Exception e) {
 
-			if (tx != null)
-				tx.rollback();
-			e.printStackTrace();
-			throw new Exception(e);
+//			if (tx != null)
+//				tx.rollback();
+//			e.printStackTrace();
+//			throw new Exception(e);
 		}
 	}
 
 	public void deleteArtist(Artist art) throws Exception {
 
-		Session sf = HibernateUtil.getSessionFactory().getCurrentSession();
-		Transaction tx = null;
+//		Session sf = HibernateUtil.getSessionFactory().getCurrentSession();
+//		Transaction tx = null;
 		try {
-			tx = sf.beginTransaction();
-			sf.delete(art);
-			tx.commit();
+//			tx = sf.beginTransaction();
+			sf.getCurrentSession().delete(art);
+//			tx.commit();
 		} catch (Exception e) {
-			if (tx != null)
-				tx.rollback();
+//			if (tx != null)
+//				tx.rollback();
 			e.printStackTrace();
-			throw new Exception(e);
+//			throw new Exception(e);
 		}
 	}
 

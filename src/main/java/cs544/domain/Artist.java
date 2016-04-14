@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -25,7 +26,7 @@ public class Artist implements Serializable{
 	private String biography;
 
 	
-	@ManyToMany(mappedBy="artist")
+	@ManyToMany(mappedBy="artist",cascade= {CascadeType.PERSIST, CascadeType.REMOVE})
 	private List<Movie> movies = new ArrayList<Movie>();
 
 	public Artist()
@@ -86,6 +87,14 @@ public class Artist implements Serializable{
 
 	public int getArtist_Id() {
 		return Id;
+	}
+
+	public int getId() {
+		return Id;
+	}
+
+	public void setId(int id) {
+		Id = id;
 	}
 	
 	

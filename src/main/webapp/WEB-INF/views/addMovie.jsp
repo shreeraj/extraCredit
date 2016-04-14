@@ -25,7 +25,7 @@
 		<spring:url value="add" var="actionUrl" />
 	</c:if>
 	<c:if test="${not empty movieForm.title}">
-		<spring:url value="update" var="actionUrl" />
+		<spring:url value="update/${movieForm.id }" var="actionUrl" />
 	</c:if>
 	<form:form method="post" modelAttribute="movieForm" action="${actionUrl}">
 		<table>

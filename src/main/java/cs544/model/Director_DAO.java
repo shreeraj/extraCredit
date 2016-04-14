@@ -7,13 +7,14 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.springframework.transaction.annotation.Transactional;
 
 import cs544.controller.HibernateUtil;
 import cs544.domain.Artist;
 import cs544.domain.Director;
 
 
-
+@Transactional
 public class Director_DAO {
 	private SessionFactory sf;
 	
@@ -22,14 +23,14 @@ public class Director_DAO {
 	}
 	
 	public List<Director> getAllDirectors() {
-		Session sf = HibernateUtil.getSessionFactory().getCurrentSession();
+//		Session sf = HibernateUtil.getSessionFactory().getCurrentSession();
 		List<Director> directors = new ArrayList<Director>();
 		Transaction tx = null;
 		try {
-			tx = sf.beginTransaction();
-			Query criteria = sf.createQuery("From Director dir");
+//			tx = sf.beginTransaction();
+			Query criteria = sf.getCurrentSession().createQuery("From Director dir");
 			directors = criteria.list();
-			tx.commit();
+//			tx.commit();
 		} catch (Exception ex) {
 			System.out.println(ex.getMessage());
 		}
@@ -38,70 +39,67 @@ public class Director_DAO {
 	
 	public void addDirector(Director director) throws Exception {
 
-		Session sf = HibernateUtil.getSessionFactory().getCurrentSession();
-		Transaction tx = sf.getTransaction();
+//		Session sf = HibernateUtil.getSessionFactory().getCurrentSession();
+//		Transaction tx = sf.getTransaction();
 
 		try {
-			tx.begin();
-			sf.persist(director);
+//			tx.begin();
+			sf.getCurrentSession().persist(director);
 
 		} catch (Exception e) {
-			if (tx != null)
-			{
-				tx.rollback(); e.printStackTrace();
-			throw new Exception(e);
-			}
+			System.out.println(e.getMessage());
 		}
 	}
-    public Director retriveMovie(int id) throws Exception{
+    public Director getDirector(int id) throws Exception{
 		
-		Session sf = HibernateUtil.getSessionFactory().getCurrentSession();
-		Transaction tx = null;
-
+//		Session sf = HibernateUtil.getSessionFactory().getCurrentSession();
+//		Transaction tx = null;
+    	Director director = new Director();
 		try {
 			
-			tx = sf.beginTransaction();
-			Director direct = (Director) sf.get(Director.class, id);
-			return direct;
+//			tx = sf.getCurrentSession()beginTransaction();
+			 director = (Director) sf.getCurrentSession().get(Director.class, id);
+			
 			
 		} catch (Exception e) {
-			if(tx != null)
+//			if(tx != null)
 			e.printStackTrace();
-			throw new Exception(e);
+//			throw new Exception(e);
 		}
+		return director;
 	}
 	
 		
-	public void modifyMovie(Director direct) throws Exception{
+	public void modifyDirector(Director direct) throws Exception{
 		
-		Session sf = HibernateUtil.getSessionFactory().getCurrentSession();
-		Transaction tx = null;
+//		Session sf = HibernateUtil.getSessionFactory().getCurrentSession();
+//		Transaction tx = null;
 		
 		try {
 			
-			tx = sf.beginTransaction();			
-			sf.merge(direct);			
-			tx.commit();			
+//			tx = sf.beginTransaction();			
+			sf.getCurrentSession().merge(direct);			
+//			tx.commit();			
 		} catch (Exception e) {
 
-			if(tx != null) tx.rollback();
+//			if(tx != null) tx.rollback();
 			e.printStackTrace();
-			throw new Exception(e);			
+//			throw new Exception(e);			
 		}	
 	}
 	
-	public void deleteMovie(Director direct)throws Exception{
+	public void deleteDirector(Director direct)throws Exception{
 		
-		Session sf = HibernateUtil.getSessionFactory().getCurrentSession();
-		Transaction tx = null;		
+//		Session sf = HibernateUtil.getSessionFactory().getCurrentSession();
+//		Transaction tx = null;		
 		try {			
-			tx = sf.beginTransaction();			
-			sf.delete(direct);			
-			tx.commit();		
+//			tx = sf.beginTransaction();			
+			sf.getCurrentSession().delete(direct);			
+//			tx.commit();		
 		} catch (Exception e) {
-			if(tx != null) tx.rollback();
+//			if(tx != null) tx.rollback();
 			e.printStackTrace();
-			throw new Exception(e);			
+//			throw new Exception(e);			
 		}
 	}
 }

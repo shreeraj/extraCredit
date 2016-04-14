@@ -3,6 +3,7 @@ package cs544.domain;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -15,7 +16,7 @@ public class Director {
 	private int id;
 	private String name;
 	
-	@ManyToMany(mappedBy="director")
+	@ManyToMany(mappedBy="director",cascade= {CascadeType.PERSIST, CascadeType.REMOVE})
 	private List<Movie> movie = new ArrayList<Movie>();
 	
 	
@@ -47,6 +48,10 @@ public class Director {
 
 	public int getId() {
 		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 	
 	

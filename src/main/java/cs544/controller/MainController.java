@@ -23,7 +23,7 @@ import cs544.model.Director_DAO;
 import cs544.model.MovieDAO;
 
 @Controller
-public class App {
+public class MainController {
 	@Resource
 	private MovieDAO movieDAO;
 	@Resource
@@ -90,9 +90,10 @@ public class App {
 		return "addMovie";
 	}
 	
-	@RequestMapping(value = "/movie/edit/update", method = RequestMethod.POST)
-	public String updateMovie(@ModelAttribute("movieForm") Movie movie, BindingResult result, Model model, final RedirectAttributes redirectAttributes) {
+	@RequestMapping(value = "/movie/edit/update/{id}", method = RequestMethod.POST)
+	public String updateMovie(@PathVariable int id,  @ModelAttribute("movieForm") Movie movie, BindingResult result, Model model, final RedirectAttributes redirectAttributes) {
 		try {
+			movie.setId(id);
 			movieDAO.modifyMovie(movie);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
