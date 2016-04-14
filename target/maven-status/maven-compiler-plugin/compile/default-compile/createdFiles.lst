@@ -1,0 +1,9 @@
+cs544/domain/Rating.class
+cs544/domain/Artist.class
+cs544/domain/Picture.class
+cs544/controller/HibernateUtil.class
+cs544/domain/Genere.class
+cs544/domain/Director.class
+cs544/domain/Movie.class
+cs544/model/MovieDAO.class
+cs544/controller/App.class
