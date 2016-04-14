@@ -12,7 +12,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import cs544.domain.Artist;
 import cs544.domain.Movie;
-import cs544.model.Artist_DAO;
+import cs544.model.ArtistDAO;
 import cs544.model.MovieDAO;
 
 @Controller
@@ -20,7 +20,7 @@ public class ArtistController {
 	@Resource
 	private MovieDAO moviedDAO;
 	@Resource
-	private Artist_DAO artistDAO;
+	private ArtistDAO artistDAO;
 
 	@RequestMapping(value = "/artist/edit/{id}", method = RequestMethod.GET)
 	public String editArtist(Model model, @PathVariable int id) throws Exception {

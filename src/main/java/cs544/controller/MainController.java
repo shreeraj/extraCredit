@@ -18,8 +18,8 @@ import cs544.domain.Director;
 import cs544.domain.Genere;
 import cs544.domain.Movie;
 import cs544.domain.Rating;
-import cs544.model.Artist_DAO;
-import cs544.model.Director_DAO;
+import cs544.model.ArtistDAO;
+import cs544.model.DirectorDAO;
 import cs544.model.MovieDAO;
 
 @Controller
@@ -27,9 +27,9 @@ public class MainController {
 	@Resource
 	private MovieDAO movieDAO;
 	@Resource
-	private Artist_DAO artistDAO;
+	private ArtistDAO artistDAO;
 	@Resource
-	private Director_DAO directorDAO;
+	private DirectorDAO directorDAO;
 
 	@RequestMapping("/")
 	public String redirectRoot() {

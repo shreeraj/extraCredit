@@ -14,9 +14,9 @@ import cs544.domain.Artist;
 import cs544.domain.Movie;
 
 @Transactional
-public class Artist_DAO {
+public class ArtistDAO {
 	private SessionFactory sf;
-	public Artist_DAO(SessionFactory sf){
+	public ArtistDAO(SessionFactory sf){
 		this.sf = sf;
 	}
 	

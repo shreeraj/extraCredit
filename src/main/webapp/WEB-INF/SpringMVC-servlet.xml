@@ -85,10 +85,10 @@
 		<constructor-arg ref="sessionFactory">
 		</constructor-arg>
 	</bean>
-	<bean id="artistDAO" class="cs544.model.Artist_DAO">
+	<bean id="artistDAO" class="cs544.model.ArtistDAO">
 		<constructor-arg ref="sessionFactory"> </constructor-arg>
 	</bean>
-	<bean id="directorDAO" class="cs544.model.Director_DAO">
+	<bean id="directorDAO" class="cs544.model.DirectorDAO">
 		<constructor-arg ref="sessionFactory"> </constructor-arg>
 	</bean>
 

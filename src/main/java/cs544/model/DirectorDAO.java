@@ -15,10 +15,10 @@ import cs544.domain.Director;
 
 
 @Transactional
-public class Director_DAO {
+public class DirectorDAO {
 	private SessionFactory sf;
 	
-	public Director_DAO(SessionFactory sf){
+	public DirectorDAO(SessionFactory sf){
 		this.sf = sf;
 	}
 	

@@ -13,8 +13,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import cs544.domain.Artist;
 import cs544.domain.Director;
 import cs544.domain.Movie;
-import cs544.model.Artist_DAO;
-import cs544.model.Director_DAO;
+import cs544.model.ArtistDAO;
+import cs544.model.DirectorDAO;
 import cs544.model.MovieDAO;
 
 @Controller
@@ -22,9 +22,9 @@ public class DirectorController {
 	@Resource
 	private MovieDAO moviedDAO;
 	@Resource
-	private Artist_DAO artistDAO;
+	private ArtistDAO artistDAO;
 	@Resource
-	private Director_DAO directorDAO;
+	private DirectorDAO directorDAO;
 
 	@RequestMapping(value = "/director/edit/{id}", method = RequestMethod.GET)
 	public String editDirector(Model model, @PathVariable int id) throws Exception {
